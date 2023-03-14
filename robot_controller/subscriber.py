@@ -7,7 +7,7 @@ class LaserReader(Node):
         super().__init__("laser_subscriber")
         self.subscription = self.create_subscription(
             LaserScan,
-            'topic'.
+            '/scan'.
             self.listener_callback,
             3
         )
