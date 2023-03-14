@@ -19,7 +19,7 @@ class LaserReader(Node):
     def listener_callback(self,msg):
         self.get_logger().info(str(msg.ranges[0]))
 def main(args = None):
-    ros.init(args)
+    ros.init()
     laser_reader = LaserReader()
     laser_reader.get_logger().info("Why does this not work")
     print(dir(LaserScan))
