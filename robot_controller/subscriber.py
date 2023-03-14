@@ -9,7 +9,7 @@ class LaserReader(Node):
             LaserScan,
             '/scan',
             self.listener_callback,
-            3
+            10
         )
         self.subscription
     def listener_callback(self,msg):
