@@ -17,7 +17,7 @@ class LaserReader(Node):
 def main(args=None):
     ros.init(args=args)
     laser_reader = LaserReader()
-    laser_reader.get_logger().info(dir(LaserScan))
+    print(dir(LaserScan))
     ros.spin(laser_reader)
     laser_reader.destroy_node()
     ros.shutdown()
