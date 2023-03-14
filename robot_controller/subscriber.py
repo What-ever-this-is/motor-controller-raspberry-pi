@@ -5,7 +5,7 @@ import rclpy.qos as q
 class LaserReader(Node):
     def __init__(self):
         super().__init__("laser_subscriber")
-        qos_profile = q.QosProfile(depth=10)
+        qos_profile = q.QoSProfile(depth=10)
         qos_profile.reliability = q.QoSReliabilityPolicy.BEST_EFFORT
         qos_profile.durability = q.QoSDurabilityPolicy.VOLATILE
         self.subscription = self.create_subscription(
