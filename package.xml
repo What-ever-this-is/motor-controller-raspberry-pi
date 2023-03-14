@@ -3,15 +3,16 @@
 <package format="3">
   <name>robot_controller</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>MIMIBOT 1</description>
   <maintainer email="yuchestart@gmail.com">ubuntu</maintainer>
-  <license>TODO: License declaration</license>
+  <license>UNLICENSED</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
-
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
   <export>
     <build_type>ament_python</build_type>
   </export>
