@@ -9,13 +9,13 @@ class LaserReader(Node):
             LaserScan,
             '/scan',
             self.listener_callback,
-            10
+            qos_profile = 10
         )
         self.subscription
     def listener_callback(self,msg):
-        self.get_logger().info("I think I heard something")
-def main(args=None):
-    ros.init(args=args)
+        print("what", msg.data[100])
+def main(args = None):
+    ros.init()
     laser_reader = LaserReader()
     print(dir(LaserScan))
     ros.spin(laser_reader)
