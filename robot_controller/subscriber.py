@@ -15,7 +15,7 @@ class LaserReader(Node):
             qos_profile
         )
         self.subscription
-        print("DDDDDD")
+        self.get_logger().info("DDDDDD")
     def listener_callback(self,msg):
         self.get_logger().info(str(msg.ranges[0]))
 def main(args = None):
