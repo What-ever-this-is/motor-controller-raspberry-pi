@@ -16,7 +16,7 @@ class LaserReader(Node):
         )
         self.subscription
     def listener_callback(self,msg):
-        print("what", msg.ranges[0])
+        self.get_logger().info(str(msg.ranges[0]))
 def main(args = None):
     ros.init()
     laser_reader = LaserReader()
