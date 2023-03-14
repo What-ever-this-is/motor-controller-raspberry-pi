@@ -9,15 +9,15 @@ class LaserReader(Node):
             LaserScan,
             'topic'.
             self.listener_callback,
-            10
+            3
         )
         self.subscription
     def listener_callback(self,msg):
-        self.get_logger().info("AAAAAAA")
+        self.get_logger().info("I think I heard something")
 def main(args=None):
     ros.init(args=args)
-    print(dir(LaserScan))
     laser_reader = LaserReader()
+    laser_reader.get_logger().info(dir(LaserScan))
     ros.spin(laser_reader)
     laser_reader.destroy_node()
     ros.shutdown()
