@@ -1,0 +1,4 @@
+<launch>
+    <node pkg='robot_controller' exec='laser_subscriber' name='subscribe'></node>
+    <node pkg='robot_controller' exec='robot_driver' name='run'></node>
+</launch>
