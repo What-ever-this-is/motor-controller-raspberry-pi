@@ -35,12 +35,15 @@ class Controller(Node):
         g.setup(self.motorPins["in4"],g.OUT)
         self.motorSignals["A"].start(0)
         self.motorSignals["B"].start(0)
+    
     def listener_callback(self,msg):
+        self.get_logger().info(msg)
         msg = msg.split()
         motorCommands = {
             "Speed":msg[0],
             "Steer":msg[1]
         }
+        
 
 def main(args = None):
     ros.init()
