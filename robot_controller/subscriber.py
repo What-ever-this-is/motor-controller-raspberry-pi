@@ -1,6 +1,7 @@
 import rclpy as ros
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
+from std_msgs.msg import String
 import rclpy.qos as q
 class LaserReader(Node):
     def __init__(self):
@@ -14,10 +15,30 @@ class LaserReader(Node):
             self.listener_callback,
             qos_profile
         )
+        self.thenewyorktimes = self.create_publisher(
+            String,
+            '/motorcommands',
+            10
+        )
         self.subscription
         self.get_logger().info("DDDDDD")
     def listener_callback(self,msg):
-        self.get_logger().info(str(len(msg.ranges)))
+        calculatedSpeed = calculateMotorSpeed(msg)
+        self.thenewyorktimes.publish(calculatedSpeed)
+
+def calculateMotorSpeed(scan):
+    myMotorSpeed = {
+        "Speed":0,
+        "Steer":0,
+    }
+
+    # Some random codes
+
+    exportMotorSpeed = str(myMotorSpeed["Speed"])+" "+str(myMotorSpeed["Steer"])
+    
+    return exportMotorSpeed
+    
+
 def main(args = None):
     ros.init()
     laser_reader = LaserReader()
