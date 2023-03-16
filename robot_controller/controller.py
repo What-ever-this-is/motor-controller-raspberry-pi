@@ -67,16 +67,17 @@ class Controller(Node):
         g.setup(self.encoderPins["e4"]["a"],g.IN)
         g.setup(self.encoderPins["e4"]["b"],g.IN)
         g.add_event_detect(self.encoderPins["e1"]["a"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e1"]["a"],True))
+ lambda: self.readEncoders(1))
         g.add_event_detect(self.encoderPins["e2"]["a"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e2"]["a"],True))
+ lambda: self.readEncoders(2))
         g.add_event_detect(self.encoderPins["e3"]["a"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e3"]["a"],True))
+ lambda: self.readEncoders(3))
         g.add_event_detect(self.encoderPins["e4"]["a"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e4"]["a"],True))
+ lambda: self.readEncoders(4))
         #endregion
         self.motorSignals["A"].start(0)
         self.motorSignals["B"].start(0)
+        
     
     def listener_callback(self,msg):
         self.get_logger().info(msg)
@@ -86,8 +87,18 @@ class Controller(Node):
             "Steer":msg[1]
         }
     
-    def readEncoders(self,pin,rising):
+    def pid_loop(self,targetposition,motor):
         pass
+
+    def readEncoders(self,encoderID):
+        encoderB = g.input(self.encoderPins['e'+str(encoderID)]["b"])
+        if(encoderB):
+            self.encoders[str(encoderID)]+=1
+        else:
+            self.encoders[str(encoderID)]-=1
+    def resetEncoders(self):
+        for i in self.encoders:
+            self.encoders[i] = 0
         
 
 def main(args = None):
