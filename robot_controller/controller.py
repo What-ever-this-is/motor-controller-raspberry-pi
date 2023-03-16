@@ -68,20 +68,12 @@ class Controller(Node):
         g.setup(self.encoderPins["e4"]["b"],g.IN)
         g.add_event_detect(self.encoderPins["e1"]["a"],g.RISING,callback=\
  lambda: self.readEncoders(self.encoderPins["e1"]["a"],True))
-        g.add_event_detect(self.encoderPins["e1"]["b"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e1"]["b"],True))
         g.add_event_detect(self.encoderPins["e2"]["a"],g.RISING,callback=\
  lambda: self.readEncoders(self.encoderPins["e2"]["a"],True))
-        g.add_event_detect(self.encoderPins["e2"]["b"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e2"]["b"],True))
         g.add_event_detect(self.encoderPins["e3"]["a"],g.RISING,callback=\
  lambda: self.readEncoders(self.encoderPins["e3"]["a"],True))
-        g.add_event_detect(self.encoderPins["e3"]["b"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e3"]["b"],True))
         g.add_event_detect(self.encoderPins["e4"]["a"],g.RISING,callback=\
  lambda: self.readEncoders(self.encoderPins["e4"]["a"],True))
-        g.add_event_detect(self.encoderPins["e4"]["b"],g.RISING,callback=\
- lambda: self.readEncoders(self.encoderPins["e4"]["b"],True))
         #endregion
         self.motorSignals["A"].start(0)
         self.motorSignals["B"].start(0)
