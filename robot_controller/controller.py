@@ -5,7 +5,7 @@ import RPi.GPIO as g
 
 
 class Controller(Node):
-    def __init__(self,ena,enb,in1,in2,in3,in4):
+    def __init__(self,ena,enb,in1,in2,in3,in4,e1a,e1b,e2a,e2b,e3a,e3b,e4a,e4b):
         super().__init__("controller")
         self.subscription = self.create_subscription(
             String,
@@ -22,6 +22,24 @@ class Controller(Node):
             "in3":in3,
             "in4":in4,
         }
+        self.encoderPins = {
+            "e1":{
+            "a":e1a,
+            "b":e1b,
+            },
+            "e2":{
+            "a":e2a,
+            "b":e2b,
+            },
+            "e3":{
+            "a":e3a,
+            "b":e3b,
+            },
+            "e4":{
+            "a":e4a,
+            "b":e4b,
+            }
+        }
         self.motorSignals = {
             "A":g.PWM(self.motorPins["ena"],1000),
             "B":g.PWM(self.motorPins["enb"],1000)
@@ -33,6 +51,46 @@ class Controller(Node):
         g.setup(self.motorPins["in2"],g.OUT)
         g.setup(self.motorPins["in3"],g.OUT)
         g.setup(self.motorPins["in4"],g.OUT)
+        g.setup(self.encoderPins["e1"]["a"],g.IN)
+        g.setup(self.encoderPins["e1"]["b"],g.IN)
+        g.setup(self.encoderPins["e2"]["a"],g.IN)
+        g.setup(self.encoderPins["e2"]["b"],g.IN)
+        g.setup(self.encoderPins["e3"]["a"],g.IN)
+        g.setup(self.encoderPins["e3"]["b"],g.IN)
+        g.setup(self.encoderPins["e4"]["a"],g.IN)
+        g.setup(self.encoderPins["e4"]["b"],g.IN)
+        g.add_event_detect(self.encoderPins["e1"]["a"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e1"]["a"],True))
+        g.add_event_detect(self.encoderPins["e1"]["a"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e1"]["a"],False))
+        g.add_event_detect(self.encoderPins["e1"]["b"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e1"]["b"],True))
+        g.add_event_detect(self.encoderPins["e1"]["b"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e1"]["b"],False))
+        g.add_event_detect(self.encoderPins["e2"]["a"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e2"]["a"],True))
+        g.add_event_detect(self.encoderPins["e2"]["a"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e2"]["a"],False))
+        g.add_event_detect(self.encoderPins["e2"]["b"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e2"]["b"],True))
+        g.add_event_detect(self.encoderPins["e2"]["b"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e2"]["b"],False))
+        g.add_event_detect(self.encoderPins["e3"]["a"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e3"]["a"],True))
+        g.add_event_detect(self.encoderPins["e3"]["a"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e3"]["a"],False))
+        g.add_event_detect(self.encoderPins["e3"]["b"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e3"]["b"],True))
+        g.add_event_detect(self.encoderPins["e3"]["b"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e3"]["b"],False))
+        g.add_event_detect(self.encoderPins["e4"]["a"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e4"]["a"],True))
+        g.add_event_detect(self.encoderPins["e4"]["a"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e4"]["a"],False))
+        g.add_event_detect(self.encoderPins["e4"]["b"],g.RISING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e4"]["b"],True))
+        g.add_event_detect(self.encoderPins["e4"]["b"],g.FALLING,callback=\
+ lambda: self.readEncoders(self.encoderPins["e4"]["b"],False))
         self.motorSignals["A"].start(0)
         self.motorSignals["B"].start(0)
     
@@ -43,11 +101,14 @@ class Controller(Node):
             "Speed":msg[0],
             "Steer":msg[1]
         }
+    
+    def readEncoders(self,pin,rising):
+        pass
         
 
 def main(args = None):
     ros.init()
-    controller = Controller(1,2,3,4,5,6)
+    controller = Controller(7,11,12,13,15,16,18,22,29,31,32,33,35,36)
     ros.spin(controller)
     controller.destroy_node()
     ros.shutdown()
