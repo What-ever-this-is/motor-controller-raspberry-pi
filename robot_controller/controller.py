@@ -100,7 +100,7 @@ class Controller(Node):
             "Speed":msg[0],
             "Steer":msg[1]
         }
-    
+
     def pid_loop(self):
         if self.running:
             if not self.pidVariables["started"]:
@@ -125,13 +125,15 @@ class Controller(Node):
                     dir=0
                 self.setMotorSpeed(int(i),power)
                 self.setMotorDirection(int(i),dir)
+                self.pidVariables["prevE"] = self.pidVariables["E"]
             sleep(1/self.pidLoopsPerSecond)
             self.pid_loop()
         else:
             self.pidVariables["started"] = False
+    #region
     def setMotorSpeed(self,motor,speed):
         self.motorSignals[str(motor)].changeDutyCycle(speed)
-    def setMotorDirection(self,motor,forwards):
+    def start(self,motor,forwards=True):
         if motor == 1:
             if forwards:
                 g.output(self.motorPins["in1"],g.HIGH)
@@ -146,14 +148,14 @@ class Controller(Node):
             else:
                 g.output(self.motorPins["in3"],g.LOW)
                 g.output(self.motorPins["in4"],g.HIGH)
-    def stop(motor):
+    def stop(self,motor):
         if motor == 1:
-            g.output(self.motorPins["in1"],g.HIGH)
+            g.output(self.motorPins["in1"],g.LOW)
             g.output(self.motorPins["in2"],g.LOW)
-
-    def setTargetSpeed(self,motor,position):
-        self.targetSpeeds[str(motor)] = position
-        
+        elif motor == 2:
+            g.output(self.motorPins["in3"],g.LOW)
+            g.output(self.motorPins["in4"],g.LOW)
+    #endregion
     def readEncoders(self,encoderID):
         encoderB = g.input(self.encoderPins['e'+str(encoderID)]["b"])
         if(encoderB):
