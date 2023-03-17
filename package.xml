@@ -3,7 +3,7 @@
 <package format="3">
   <name>robot_controller</name>
   <version>0.0.0</version>
-  <description>MIMIBOT 1</description>
+  <description>MIMIBOT v1.1: THIS PACKAGE IS TO BE RUN AS ROOT</description>
   <maintainer email="yuchestart@gmail.com">ubuntu</maintainer>
   <license>UNLICENSED</license>
 
