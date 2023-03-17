@@ -146,7 +146,11 @@ class Controller(Node):
             else:
                 g.output(self.motorPins["in3"],g.LOW)
                 g.output(self.motorPins["in4"],g.HIGH)
-    
+    def stop(motor):
+        if motor == 1:
+            g.output(self.motorPins["in1"],g.HIGH)
+            g.output(self.motorPins["in2"],g.LOW)
+
     def setTargetSpeed(self,motor,position):
         self.targetSpeeds[str(motor)] = position
         
