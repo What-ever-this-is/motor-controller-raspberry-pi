@@ -28,8 +28,8 @@ class LaserReader(Node):
 
 def calculateMotorSpeed(scan):
     myMotorSpeed = {
-        "Speed":0,
-        "Steer":0,
+        "A":1,
+        "B":1
     }
 
     # Some random codes
