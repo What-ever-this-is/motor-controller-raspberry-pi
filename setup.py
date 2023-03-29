@@ -25,7 +25,6 @@ setup(
     entry_points={
         'console_scripts': [
             'laser_subscriber = robot_controller.subscriber:main',
-            'robot_driver = robot_controller.controller:main'
         ],
     },
 )
