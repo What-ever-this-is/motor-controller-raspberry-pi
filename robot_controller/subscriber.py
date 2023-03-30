@@ -10,6 +10,7 @@ TRACK_WIDTH = 27
 TRACK_WIDTH_CIRCUMFERENCE = 84.823
 SPEED_FOR_1_DEGREE = WHEEL_CIRCUMFERENCE
 
+
 class LaserReader(Node):
     def __init__(self,v1,v2,in1,in2,in3,in4,e1a,e1b,e2a,e2b):
         super().__init__("laser_subscriber")
@@ -52,7 +53,7 @@ class LaserReader(Node):
     def drive_loop(self):
         minimumIndex = self.scan.ranges.index(self.scan.range_min)
         minimumAngle = self.scan.angle_increment*minimumIndex
-        print(minimumIndex,minimumAngle,self.scan.range_min)
+        self.get_logger().info(minimumIndex,minimumAngle,self.scan.range_min)
 
         
 
@@ -61,7 +62,7 @@ class LaserReader(Node):
 def main(args = None):
     ros.init()
     laser_reader = LaserReader(7,11,12,13,15,16,18,22,29,31)
-    laser_reader.get_logger().info("Why does this not work")
+    laser_reader.get_logger().info("NODE INITIATED SUCCESSFULLY")
     print(dir(LaserScan))
     ros.spin(laser_reader)
     laser_reader.destroy_node()
