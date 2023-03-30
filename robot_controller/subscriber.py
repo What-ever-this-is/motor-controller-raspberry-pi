@@ -36,6 +36,7 @@ class LaserReader(Node):
             "e2a":e2a,
             "e2b":e2b,
         }
+        g.setmode(g.BOARD)
         g.setup(e1a,g.IN)
         g.setup(e1b,g.IN)
         g.setup(e2a,g.IN)
