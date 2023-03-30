@@ -59,7 +59,7 @@ class LaserReader(Node):
 
 def main(args = None):
     ros.init()
-    laser_reader = LaserReader()
+    laser_reader = LaserReader(7,11,12,13,15,16,18,22,29,31)
     laser_reader.get_logger().info("Why does this not work")
     print(dir(LaserScan))
     ros.spin(laser_reader)
