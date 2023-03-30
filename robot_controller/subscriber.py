@@ -51,9 +51,12 @@ class LaserReader(Node):
         self.notstarted = True
     def laser_recieved(self,msg):
         self.scan = msg
-        if self.notstarted:
-            self.drive_loop()
-            self.notstarted = False
+        minimumIndex = self.scan.ranges.index(self.scan.range_min)
+        minimumAngle = self.scan.angle_increment*minimumIndex
+        self.get_logger().info(minimumIndex,minimumAngle,self.scan.range_min)
+        # if self.notstarted:
+            # self.drive_loop()
+            # self.notstarted = False
     def drive_loop(self):
         minimumIndex = self.scan.ranges.index(self.scan.range_min)
         minimumAngle = self.scan.angle_increment*minimumIndex
